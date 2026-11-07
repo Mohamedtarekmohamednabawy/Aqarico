@@ -1,0 +1,46 @@
+API Rate Limiting & Security Documentation
+=========================================
+To ensure a high-quality, uninterrupted experience while safeguarding backend resources from bots, scraping, and brute-force attacks, Aqarico implements a strict, IP-based 4-tier rate-limiting strategy using express-rate-limit.
+
+1. Global API Limiter
+---------------------
+- Allowance: 800 Requests
+- Timeout Window: 15 Minutes
+- Purpose: DDoS / Scraping Shield. Applies to all endpoints universally. Provides seamless navigation for aggressive power-users while terminating mass-scraping bots.
+
+2. Authentication Limiter
+-------------------------
+- Allowance: 30 Requests
+- Timeout Window: 15 Minutes
+- Purpose: Brute-Force Guard. Applies to /login, /register, and /verify-2fa. High enough to excuse typos, low enough to neutralize credential-stuffing attacks.
+
+3. Sensitive Actions Limiter
+----------------------------
+- Allowance: 15 Requests
+- Timeout Window: 5 Minutes
+- Purpose: Quota / Spam Protection. Applies to endpoints that trigger 3rd-party services (e.g., sending emails via Webhook or WhatsApp messages). Prevents malicious draining of API limits and user inbox spamming.
+
+4. AI Chat Engine Limiter
+-------------------------
+- Allowance: 60 Messages
+- Timeout Window: 15 Minutes
+- Purpose: LLM Budget Controller. Prevents automated scripts from endlessly querying the AI agent, which guarantees API tokens and OpenAI/Gemini quotas are preserved.
+
+5. Account Lockout Policy (2FA)
+-------------------------------
+- Allowance: 5 Attempts
+- Reset: New code request required
+- Purpose: Brute-Force Termination. Unlike IP-based limiting, this persists across IP changes for a specific user session. If a user fails 5 times, that specific 2FA code is invalidated instantly.
+
+6. Password Account Lockout Policy
+----------------------------------
+- Allowance: 5 Failed Password Attempts
+- Lockout Duration: 15 Minutes
+- Coverage: Login, Password Update, Profile Edit, Account Deletion
+- Purpose: Multi-Layered Defense. Provides account-level protection against credential stuffing. If a user provides an incorrect password 5 times, sensitive actions for that account are frozen across all IPs for 15 minutes. Successful login/verification resets this counter.
++
++7. Frontend Traffic Shaping (Caching & Deduplication)
++-----------------------------------------------------
++- Mechanism: Request deduplication and TTL-based caching.
++- Window: 60 Seconds (Default TTL)
++- Purpose: API Load Reduction. Prevents redundant/duplicate GET requests from being sent to the server from a single client session. If multiple components request the same data simultaneously, only one network request is dispatched. Subscriptions/Search results are cached briefly to improve UI responsiveness and preserve backend bandwidth.

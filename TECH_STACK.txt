@@ -1,0 +1,453 @@
+================================================================================
+  AQARICO PLATFORM — FULL TECH STACK & DEPENDENCIES REFERENCE
+  Generated: 2026-06-17
+================================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 1 — FRONTEND (React / Vite)
+  Location: /
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  CORE RUNTIME                                                               │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ Library              │ Version    │ Purpose & Where Used                    │
+├──────────────────────┼────────────┼─────────────────────────────────────────┤
+│ react                │ ^19.1.1    │ Core UI library. Every .jsx component.  │
+│ react-dom            │ ^19.1.1    │ DOM rendering. Entry point in main.jsx. │
+│ react-router-dom     │ ^7.9.6     │ Client-side routing. All page naviga-  │
+│                      │            │ tion, useNavigate, Link, useLocation.   │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  HTTP / API                                                                 │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ axios                │ ^1.15.2    │ All API calls to the backend. Used in   │
+│                      │            │ src/services/* (authService, admin-      │
+│                      │            │ Service, propertyService, etc.)         │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  ANIMATIONS                                                                 │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ framer-motion        │ ^12.38.0   │ Page transitions, card entrance anima-  │
+│                      │            │ tions, hover effects. Used in Property- │
+│                      │            │ Card, AgentCard, Login, TwoStepVerify,  │
+│                      │            │ PasswordSecurity, MarketDashboard, etc. │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  ICONS                                                                      │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ lucide-react         │ ^0.552.0   │ Icon system used across all components. │
+│                      │            │ E.g. Mail, Shield, Trash, MapPin, etc.  │
+│ flag-icons           │ ^7.5.0     │ Country flag SVGs used in the Language  │
+│                      │            │ Selector and country-picker components. │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  UI COMPONENTS & FEEDBACK                                                   │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ sweetalert2          │ ^11.26.3   │ Premium modal popups & toast notifica-  │
+│                      │            │ tions for auth flows, deletion confirms,│
+│                      │            │ success & error messages site-wide.     │
+│ overlayscrollbars    │ ^2.13.0    │ Custom styled scrollbars.               │
+│ overlayscrollbars-   │ ^0.5.6     │ React wrapper for overlayscrollbars.    │
+│ react                │            │ Used in sidebars & modal content areas. │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  CHARTS & DATA VISUALIZATION                                                │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ chart.js             │ ^4.5.1     │ Core charting engine.                   │
+│ react-chartjs-2      │ ^5.3.1     │ React wrapper for chart.js. Used in     │
+│                      │            │ MarketDashboard and AdminDashboard for  │
+│                      │            │ price trends, listing stats, etc.       │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  MAPS                                                                       │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ leaflet              │ ^1.9.4     │ Core interactive map engine.            │
+│ react-leaflet        │ ^5.0.0     │ React wrapper for Leaflet. Used in      │
+│                      │            │ PropertyDetails map and property search  │
+│                      │            │ map view.                               │
+│ react-leaflet-       │ ^4.0.0     │ Groups nearby map markers into clusters │
+│ cluster              │            │ to avoid visual overlap on the map.     │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  THEMING                                                                    │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ next-themes          │ ^0.4.6     │ Light/Dark theme persistence & system   │
+│                      │            │ preference detection. Used in theme/    │
+│                      │            │ useTheme.js and wrapped around the app. │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  STYLING                                                                    │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ tailwindcss          │ ^4.1.16    │ Utility CSS classes. Present alongside  │
+│                      │            │ Vanilla CSS for layout utilities.       │
+│ @tailwindcss/vite    │ ^4.1.16    │ Vite plugin to compile Tailwind CSS.    │
+│ autoprefixer         │ ^10.4.21   │ PostCSS plugin that adds vendor prefixes│
+│                      │            │ to CSS for browser compatibility.       │
+│ postcss              │ ^8.5.6     │ CSS transformation pipeline tool.       │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  BUILD TOOLING (Dev Dependencies)                                           │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ vite                 │ ^7.1.7     │ Build tool and dev server. Runs the     │
+│                      │            │ entire frontend with HMR via `npm run   │
+│                      │            │ dev`.                                   │
+│ @vitejs/plugin-react │ ^5.0.4     │ Adds React Fast Refresh & JSX support   │
+│                      │            │ to Vite.                                │
+│ eslint               │ ^9.36.0    │ Code linting. Enforces JS code quality. │
+│ @eslint/js           │ ^9.36.0    │ ESLint core JS rules.                   │
+│ eslint-plugin-       │ ^5.2.0     │ Linting rules for React Hooks usage.    │
+│ react-hooks          │            │                                         │
+│ eslint-plugin-       │ ^0.4.22    │ Validates React Fast Refresh boundaries.│
+│ react-refresh        │            │                                         │
+│ @types/react         │ ^19.1.16   │ TypeScript type hints for React.        │
+│ @types/react-dom     │ ^19.1.9    │ TypeScript type hints for ReactDOM.     │
+│ globals              │ ^16.4.0    │ Global variable definitions for ESLint. │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  CUSTOM INTERNAL SYSTEMS (Frontend)                                         │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ src/i18n/            │ Custom i18n system with en.json, ar.json. Handles   │
+│ LanguageContext.jsx  │ RTL/LTR, localStorage caching, and backend sync.    │
+│                      │ UI limited to EN/AR; other locales are archived.    │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ src/theme/tokens.js  │ Custom design token system. Defines all colors,     │
+│                      │ spacing, shadows per theme. Used in every component.│
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ src/utils/           │ Generates a persistent unique device fingerprint in │
+│ deviceInfo.js        │ localStorage for the Trusted Devices auth system.   │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ src/services/        │ Response caching & request deduplication system.    │
+│ requestCache.js      │ Prevents redundant API calls (1-min global TTL).    │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ Backend Status       │ Context-driven system to monitor API availability,  │
+│ System               │ handle downtime UI, and manage recovery retries.    │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ Lockout System       │ Multi-layered brute-force protection logic active   │
+│                      │ on login and sensitive account management routes.   │
+│                      │ Enforces a 5-fail/15-min lockout at the DB level.  │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 2 — BACKEND (Node.js / Express)
+  Location: /aqarico-backend
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  CORE SERVER                                                                │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ Library              │ Version    │ Purpose & Where Used                    │
+├──────────────────────┼────────────┼─────────────────────────────────────────┤
+│ express              │ ^4.19.2    │ HTTP server and REST API framework.     │
+│                      │            │ Handles all /api/* routes.              │
+│ cors                 │ ^2.8.5     │ Enables cross-origin requests from the  │
+│                      │            │ frontend (Vite dev server) to the API.  │
+│ helmet               │ ^8.1.0     │ Sets secure HTTP headers automatically  │
+│                      │            │ (XSS, clickjacking, CSP protection).    │
+│ morgan               │ ^1.10.0    │ HTTP request logger. Logs method, path, │
+│                      │            │ status and response time to console.    │
+│ dotenv               │ ^16.6.1    │ Loads .env file into process.env for    │
+│                      │            │ secrets (DB URI, JWT secret, keys).     │
+│ cookie-parser        │ ^1.4.6     │ Parses cookies from request headers.    │
+│                      │            │ Essential for HTTP-only JWT sessions.   │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  DATABASE                                                                   │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ mongoose             │ ^8.23.1    │ MongoDB ODM. Defines all schemas/models │
+│                      │            │ (User, Property, Agent, Booking, etc.). │
+│                      │            │ Handles all DB queries.                 │
+│ mongodb              │ ^7.2.0     │ Native MongoDB driver (used directly    │
+│                      │            │ where mongoose is not sufficient).      │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  SECURITY & AUTHENTICATION                                                  │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ bcryptjs             │ ^2.4.3     │ Hashes user passwords before saving to  │
+│                      │            │ DB. Used in User model pre-save hook &  │
+│                      │            │ matchPassword method.                   │
+│ jsonwebtoken         │ ^9.0.2     │ Creates and verifies JWTs for session   │
+│                      │            │ authentication. NOW STORED EXCLUSIVELY  │
+│                      │            │ IN HTTP-ONLY SECURE COOKIES (XSS Proof).│
+│ express-rate-limit   │ ^8.5.2     │ Rate limiting middleware to prevent API │
+│                      │            │ abuse on login, register, OTP endpoints.│
+│ express-validator    │ ^7.1.0     │ Server-side request body validation on  │
+│                      │            │ auth and property creation endpoints.   │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  NOTIFICATIONS / MESSAGING                                                  │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ nodemailer           │ ^8.0.7     │ Sends transactional emails (OTP codes,  │
+│                      │            │ registration verification). Used in     │
+│                      │            │ utils/notification.js via a configured  │
+│                      │            │ SMTP transport.                         │
+│ axios (backend)      │ ^1.7.2     │ Used to call the Meta WhatsApp Cloud    │
+│                      │            │ API to send WhatsApp OTP messages.      │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  FILE UPLOADS & MEDIA                                                       │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ multer               │ ^1.4.5     │ Handles multipart/form-data for file    │
+│                      │            │ uploads (avatar, property images).      │
+│                      │            │ Stores files in memory buffer before    │
+│                      │            │ uploading to Cloudinary.                │
+│ cloudinary           │ ^2.2.0     │ Cloud storage for all user avatars and  │
+│                      │            │ property listing images. SDK used in    │
+│                      │            │ utils/cloudinary.js.                    │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  PAYMENTS                                                                   │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ stripe               │ ^15.8.0    │ Payment processing SDK. Used in         │
+│                      │            │ bookingController.js for paid booking   │
+│                      │            │ flows and subscription management.      │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  REPORTING / EXPORTS                                                        │
+├──────────────────────┬────────────┬─────────────────────────────────────────┤
+│ xlsx                 │ ^0.18.5    │ Generates Excel (.xlsx) export files    │
+│                      │            │ from analytics data in the Admin        │
+│                      │            │ Dashboard.                              │
+└──────────────────────┴────────────┴─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  NODE.JS BUILT-IN MODULES USED                                              │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+│ crypto               │ Used in deviceInfo.js (frontend) and potentially    │
+│                      │ authController.js to generate unique IDs/tokens.    │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 3 — EXTERNAL SERVICES (Third-Party APIs)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌──────────────────────┬─────────────────────────────────────────────────────┐
+│ Service              │ Purpose                                             │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ MongoDB Atlas        │ Cloud-hosted MongoDB database (production).         │
+│ Cloudinary           │ Image hosting CDN for avatars and property photos.  │
+│ Stripe               │ Payment gateway for booking and subscription flows. │
+│ Meta WhatsApp        │ Cloud API used to send OTP messages via WhatsApp    │
+│ Cloud API            │ during registration 2FA and device verification.    │
+│ SMTP (Nodemailer)    │ Email delivery for OTP codes and notifications.     │
+│ OpenStreetMap /      │ Free tile server for the Leaflet maps displayed on  │
+│ Leaflet Tiles        │ property pages and search map view.                 │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 4 — DEVOPS & TOOLCHAIN SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌──────────────────────┬─────────────────────────────────────────────────────┐
+│ Tool                 │ Role                                                │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ Git + GitHub         │ Version control and code hosting.                  │
+│                      │ Repo: NinjaSphinXO/Aqarico2                        │
+│ Vite                 │ Frontend dev server + production bundler.           │
+│ Node.js (ESM)        │ Backend runtime (both projects use "type":"module") │
+│ node --watch         │ Backend dev auto-restart (no nodemon needed).       │
+│ ESLint               │ JavaScript linting for the frontend codebase.       │
+│ Docker               │ Both ml_service and chat_service ship with a        │
+│                      │ Dockerfile for containerized production deployment. │
+│ Uvicorn              │ ASGI server that runs FastAPI apps in both Python   │
+│                      │ microservices (ml_service port 8000, chat_service   │
+│                      │ port 8001).                                         │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 5 — ML SERVICE (Python / FastAPI)
+  Location: /aqarico-backend/ml_service
+  Runtime: Python 3.x  |  Server: Uvicorn (port 8000)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PURPOSE:
+  Standalone FastAPI microservice that serves a pre-trained XGBoost regression
+  model for real estate price prediction. The Node.js backend proxies requests
+  to this service whenever a property price estimate is needed.
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  DEPENDENCIES                                                               │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+│ Library              │ Purpose & Where Used                                │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ fastapi              │ Web framework for the prediction REST API.          │
+│                      │ Defines GET /  (health check) and POST /predict.   │
+│ uvicorn              │ ASGI server that runs the FastAPI app.              │
+│ xgboost              │ Gradient-boosted tree model used for price          │
+│                      │ prediction. Loaded from models/                     │
+│                      │ xgboost_real_estate_model.pkl at startup.           │
+│ scikit-learn         │ Provides the ColumnTransformer / OrdinalEncoder     │
+│                      │ pipeline (data_encoder.pkl) used to preprocess      │
+│                      │ categorical inputs before feeding them to XGBoost.  │
+│ pandas               │ Builds the input DataFrame from the request         │
+│                      │ payload in the exact column order the model needs.  │
+│ numpy                │ Performs the inverse log transform (np.exp) on the  │
+│                      │ raw model output (Log_Price) to get actual EGP.     │
+│ joblib               │ Deserializes the .pkl model and encoder files from  │
+│                      │ disk at startup using joblib.load().                │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ fastapi.middleware   │ CORSMiddleware — allows all origins so the Node.js  │
+│ .cors                │ backend and frontend can call this service freely.  │
+│ pydantic (built-in   │ BaseModel used to define and validate the           │
+│ with FastAPI)        │ PredictionRequest and PredictionResponse schemas.   │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  MODEL FILES                                                                │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+│ models/              │ xgboost_real_estate_model.pkl — trained XGBoost     │
+│                      │ regressor (target = Log_Price of EGP property).     │
+│                      │ data_encoder.pkl — scikit-learn ColumnTransformer   │
+│                      │ that OrdinalEncodes location, district, finish.     │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  CONTAINERIZATION                                                           │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+│ Dockerfile           │ Builds a Python image, installs requirements.txt,  │
+│                      │ copies the service files and model artifacts, and   │
+│                      │ starts uvicorn on port 8000.                        │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 6 — CHAT SERVICE (Python / FastAPI + Gemini AI)
+  Location: /aqarico-backend/chat_service
+  Runtime: Python 3.x  |  Server: Uvicorn (port 8001)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PURPOSE:
+  Full-featured AI real estate consultant chatbot. Combines Google Gemini 2.5
+  Flash (LLM) with agentic tool-calling to search the live MongoDB database,
+  predict property prices using XGBoost, compare listings, and send email
+  notifications — all in a conversational Arabic/English interface.
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  DEPENDENCIES                                                               │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+│ Library              │ Purpose & Where Used                                │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ fastapi              │ Web framework. Exposes POST /chat and GET /health   │
+│                      │ endpoints consumed by the React frontend.           │
+│ uvicorn              │ ASGI production server. Runs the chat service.      │
+│ google-genai         │ Official Google Gemini SDK (google.genai). Powers   │
+│                      │ the conversational AI using gemini-2.5-flash model. │
+│                      │ Used with automatic function-calling (tool calling) │
+│                      │ to invoke search, predict, compare tools.           │
+│ pymongo[srv]         │ Direct MongoDB driver. Connects to MongoDB Atlas    │
+│                      │ to run live property searches, fetch districts and  │
+│                      │ locations, and count documents in /chat responses.  │
+│ python-dotenv        │ Loads .env secrets (MONGODB_URI, GEMINI_API_KEY_*,  │
+│                      │ SMTP credentials, FRONTEND_URL) at startup.         │
+│ pandas               │ Builds DataFrames for XGBoost inference inside the  │
+│                      │ predict_property_price tool function.               │
+│ numpy                │ Applies np.expm1() to reverse the log-transformed  │
+│                      │ model output and get the actual EGP price.          │
+│ joblib               │ Loads the shared XGBoost .pkl model and encoder    │
+│                      │ from the models/ directory at service startup.      │
+│ scikit-learn         │ Runs the encoder.transform() pipeline to preprocess │
+│                      │ categorical inputs before model inference.          │
+│ xgboost              │ Runs the ML regression model within the chat tool  │
+│                      │ (predict_property_price) to inline price estimates. │
+│ openpyxl             │ Excel read/write engine used by pandas if the      │
+│                      │ service loads or exports spreadsheet data.          │
+│ certifi              │ Provides CA certificates for secure TLS connections │
+│                      │ to MongoDB Atlas (tlsCAFile=certifi.where()).       │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ smtplib (stdlib)     │ Sends transactional emails directly from the chat  │
+│ email.mime (stdlib)  │ service (e.g., lead notification emails) without   │
+│                      │ relying on the Node.js backend.                    │
+│ difflib (stdlib)     │ Fuzzy-matches user-typed Arabic/English location   │
+│                      │ names to the canonical DB values (get_close_       │
+│                      │ matches). Also used in owner/agent name resolution. │
+│ re (stdlib)          │ Regex used to build flexible Arabic name patterns  │
+│                      │ and to parse property IDs from tool call responses. │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  AGENTIC TOOLS (Gemini Function Calling)                                    │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+│ search_properties    │ Queries MongoDB for available listings with 16+     │
+│                      │ filter params (price, area, location, finish,       │
+│                      │ amenities, owner name, featured, verified, etc.).   │
+│ predict_property_    │ Runs the XGBoost model inline to give a price       │
+│ price                │ estimate for any property spec the user describes.  │
+│ compare_properties   │ Selects 2–4 listing IDs for the frontend visual    │
+│                      │ comparison UI, paired with a textual analysis.      │
+│ get_database_        │ Returns aggregate DB stats (location list,          │
+│ metadata             │ district list, total counts) for context injection. │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  AI MODEL                                                                   │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+│ gemini-2.5-flash     │ Google Gemini 2.5 Flash via google-genai SDK.       │
+│                      │ Supports Arabic + English, tool-calling, multi-turn │
+│                      │ chat history. Up to 10 fallback API keys supported  │
+│                      │ (GEMINI_API_KEY_1 … GEMINI_API_KEY_10) to handle   │
+│                      │ rate limits without downtime.                       │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  MODEL FILES (shared with ml_service)                                       │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+│ models/              │ xgboost_real_estate_model.pkl — same trained model  │
+│                      │ used by ml_service but loaded independently here.   │
+│                      │ data_encoder.pkl — same OrdinalEncoder pipeline.   │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  CONTAINERIZATION                                                           │
+├──────────────────────┬─────────────────────────────────────────────────────┤
+│ Dockerfile           │ Builds a Python image, installs requirements.txt,  │
+│                      │ copies service + model files, and starts uvicorn on │
+│                      │ port 8001. Includes .env injection for secrets.     │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 3 — EXTERNAL SERVICES (Third-Party APIs)  [UPDATED]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌──────────────────────┬─────────────────────────────────────────────────────┐
+│ Service              │ Purpose                                             │
+├──────────────────────┼─────────────────────────────────────────────────────┤
+│ MongoDB Atlas        │ Cloud-hosted MongoDB database (production).         │
+│ Cloudinary           │ Image hosting CDN for avatars and property photos.  │
+│ Stripe               │ Payment gateway for booking and subscription flows. │
+│ Meta WhatsApp        │ Cloud API used to send OTP messages via WhatsApp    │
+│ Cloud API            │ during registration 2FA and device verification.    │
+│ SMTP (Nodemailer)    │ Email delivery for OTP codes (Node.js backend).     │
+│ SMTP (smtplib)       │ Email delivery from the chat_service Python micro-  │
+│                      │ service (lead/contact notifications).               │
+│ OpenStreetMap /      │ Free tile server for Leaflet maps on property pages.│
+│ Leaflet Tiles        │                                                     │
+│ Google Gemini AI     │ gemini-2.5-flash LLM powering the AI chatbot in    │
+│ (google-genai SDK)   │ chat_service. Used with agentic tool-calling.       │
+│                      │ Up to 10 rotating API keys for rate-limit handling. │
+└──────────────────────┴─────────────────────────────────────────────────────┘
+
+================================================================================
+  END OF DOCUMENT
+================================================================================

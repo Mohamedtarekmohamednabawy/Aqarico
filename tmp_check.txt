@@ -1,0 +1,115 @@
+﻿import { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+    Phone,
+    Mail,
+    MessageCircle,
+    CheckCircle,
+    MapPin,
+    Home,
+    Star,
+    ChevronDown,
+    ChevronUp,
+    ExternalLink,
+    Award,
+} from "lucide-react";
+import { displayFormattedPhone } from "../data/countries";
+import { useCurrency } from "../context/CurrencyContext";
+import { useLanguage } from "../i18n/LanguageContext";
+import { optimizeImageUrl } from "../utils/imageUrl";
+
+/* â”€â”€â”€ helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+const getPhoneHref = (p, country = "EG") => {
+    if (!p) return "";
+    const formatted = displayFormattedPhone(p, country);
+    return `tel:${formatted.replace(/[^\d+]/g, "")}`;
+};
+const getEmailHref = (e) => { const c = String(e || "").trim(); return c ? `mailto:${c}` : ""; };
+const getWhatsApp = (p, msg = "", country = "EG") => {
+    if (!p) return "";
+    const formatted = displayFormattedPhone(p, country);
+    const d = formatted.replace(/\D/g, "");
+    return `https://wa.me/${d}${msg ? `?text=${encodeURIComponent(msg)}` : ""}`;
+};
+
+const AVATAR_SEEDS = [
+    { bg: "#FAC775", color: "#633806" },
+    { bg: "#F5C4B3", color: "#712B13" },
+    { bg: "#9FE1CB", color: "#085041" },
+    { bg: "#CED1F6", color: "#3C3489" },
+    { bg: "#B5D4F4", color: "#0C447C" },
+    { bg: "#C0DD97", color: "#27500A" },
+];
+
+const getInitials = (name = "") =>
+    name.split(" ").slice(0, 2).map((w) => w[0]?.toUpperCase()).join("");
+
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   AgentCard
+   Props:
+     agent            â€” agent object from backend
+     tokens           â€” designTokens[themeName].colors / full tokens object
+     index            â€” position in list (drives avatar seed)
+     listings         â€” pre-fetched property array for this agent
+     loadingListings  â€” bool: show spinner in listings panel
+     onToggleListings â€” callback(agent) when user opens listings tab
+     compact          â€” bool: render smaller version for homepage preview
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+const AgentCard = ({
+    agent,
+    tokens,
+    index = 0,
+    listings = [],
+    loadingListings = false,
+    onToggleListings,
+    compact = false,
+}) => {
+    const { formatPrice } = useCurrency();
+    const { t, language } = useLanguage();
+    const tokensResolved = tokens.colors ?? tokens;
+    const seed = AVATAR_SEEDS[index % AVATAR_SEEDS.length];
+    const [listingsOpen, setListingsOpen] = useState(false);
+    const [revealedContact, setRevealedContact] = useState({ phone: false, email: false });
+
+    /* normalise backend shape */
+    const name = agent.name || `${agent.firstName ?? ""} ${agent.lastName ?? ""}`.trim();
+    const rawPhone = agent.phone || agent.phoneNumber || agent.user?.phone || "";
+    const phone = rawPhone
+        ? (displayFormattedPhone ? displayFormattedPhone(rawPhone, agent.user?.country || "EG") : rawPhone)
+        : "";
+    const email = agent.email || agent.user?.email || "";
+    const avatar = agent.avatar || agent.profileImage || agent.user?.avatar || "";
+    const agentLocation = agent.location || "";
+    const agentDistrict = agent.district || agent.area || "";
+    const bio = agent.bio || agent.description || "";
+    const totalSales = agent.assignedListings?.length ?? agent.listingsCount ?? agent.totalSales ?? agent.totalProperties ?? listings.length ?? 0;
+    const rating = agent.rating ?? null;
+    const specialty = agent.specialty || agent.specialization || "";
+    const verified = agent.isVerified ?? agent.isVerifiedByAdmin ?? agent.verified ?? false;
+
+    const waMsg = t("agentCard.waMsg", { name: name || t("agentCard.agent") });
+    const userCountry = agent.user?.country || "EG";
+    const whatsappHref = getWhatsApp(rawPhone, waMsg, userCountry);
+
+    const displayListings = listingsOpen ? listings : listings.slice(0, 5);
+
+    const handleListingsToggle = () => {
+        const next = !listingsOpen;
+        setListingsOpen(next);
+        if (next && onToggleListings) onToggleListings(agent);
+    };
+
+    const revealContact = (type) => {
+        setRevealedContact((prev) => ({ ...prev, [type]: true }));
+    };
+
+    return (
+        <motion.article
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={compact ? { y: -5 } : undefined}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            style={{ backgroundColor: tokensResolved.surface, borderColor: tokensResolved.border, color: tokensResolved.text }}
+            className="rounded-3xl border overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-300 relative group"
+        >
